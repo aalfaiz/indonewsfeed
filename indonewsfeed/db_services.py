@@ -17,5 +17,5 @@ class NewsRepository:
 
     def is_link_exist(self, link):
         link = self.collection.find_one({"link":link})
-        return len(link) > 0
+        return link is not None and len(link) > 0
         

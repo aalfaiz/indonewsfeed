@@ -20,5 +20,4 @@ class MongoDBPipeline(object):
         repo = NewsRepository()
         if valid and not repo.is_link_exist(item["link"]):
             repo.save(item)
-            log.msg("Question Added to MongoDB database!", level=log.DEBUG, spider=spider)
         return item
