@@ -2,7 +2,6 @@
 import scrapy
 from bs4 import BeautifulSoup
 from indonewsfeed.items import IndoNewsFeedItem
-
 class DetikSpider(scrapy.Spider):
     name = "detik_spider"
     allowed_domains = ["detik.com"]
@@ -11,15 +10,12 @@ class DetikSpider(scrapy.Spider):
         ]
 
     def parse(self, response):
-        print("masuk %s" % response.url)
-
         # get news links
         links = response.xpath('//article//a/@href')
         for link in links:
             yield scrapy.Request(link.extract(), callback=self.parse_detail_page)
 
     def parse_detail_page(self, response):
-        print("masuk detail page : %s" % response.url)
         soup = BeautifulSoup(response.text, 'lxml')
 
         item = IndoNewsFeedItem()

@@ -15,5 +15,7 @@ class NewsRepository:
     def save(self, item):
         self.collection.insert(dict(item))
 
-    # def is_exist(self, link):
+    def is_link_exist(self, link):
+        link = self.collection.find_one({"link":link})
+        return len(link) > 0
         

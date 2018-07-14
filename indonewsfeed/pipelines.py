@@ -11,15 +11,14 @@ from scrapy import log
 
 class MongoDBPipeline(object):
     def process_item(self, item, spider):
-        print("masuk pipeliens")
         valid = True
         for data in item:
             if not data:
                 valid = False
                 raise DropItem("Missing {0}!".format(data))
 
-        if valid:
-            repo = NewsRepository()
+        repo = NewsRepository()
+        if valid and not repo.is_link_exist(item["link"]):
             repo.save(item)
             log.msg("Question Added to MongoDB database!", level=log.DEBUG, spider=spider)
         return item
