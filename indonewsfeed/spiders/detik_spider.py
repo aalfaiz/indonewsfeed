@@ -9,8 +9,7 @@ class DetikSpider(scrapy.Spider):
     name = "detik_spider"
     allowed_domains = ["detik.com"]
     start_urls = [
-        'https://news.detik.com/indeks',
-        'https://news.detik.com/indeks/all?date=07%2F12%2F2018'
+        'https://news.detik.com/indeks'
         ]
 
     def parse(self, response):
@@ -26,7 +25,7 @@ class DetikSpider(scrapy.Spider):
         item = IndoNewsFeedItem()
         item["title"] = soup.title.string
         item["link"] = response.url
-        item["date"] = ""
+        item["date"] = self.get_published_date(soup)
         item["desc"] = self.get_news_detail(soup)
         item["source"] = "detik"
         logger = logging.getLogger()
@@ -40,4 +39,8 @@ class DetikSpider(scrapy.Spider):
         helper.remove_element(content, 'table')
         helper.remove_element(content, 'script')
         return content.prettify()
+
+    def get_published_date(self, soup):
+        published_date = soup.find("div",{"class":"date"})
+        return published_date.get_text()
 
