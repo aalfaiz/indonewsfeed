@@ -7,8 +7,7 @@ class DetikSpider(scrapy.Spider):
     name = "detik_spider"
     allowed_domains = ["detik.com"]
     start_urls = [
-        'https://news.detik.com/indeks',
-        'https://news.detik.com/indeks/all?date=07%2F12%2F2018'
+        'https://news.detik.com/indeks'
         ]
 
     def parse(self, response):

@@ -14,3 +14,6 @@ class NewsRepository:
 
     def save(self, item):
         self.collection.insert(dict(item))
+
+    # def is_exist(self, link):
+        
