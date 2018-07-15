@@ -91,7 +91,6 @@ ITEM_PIPELINES = {
 
 LOG_LEVEL = 'INFO'
 
-MONGODB_SERVER = "localhost"
-MONGODB_PORT = 27017
+MONGODB_URI =  "mongodb://aalfaiz:aalfaiz@localhost"
 MONGODB_DB = "indonewsfeed"
 MONGODB_COLLECTION = "newsfeed"
