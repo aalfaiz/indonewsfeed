@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import logging
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from bs4 import BeautifulSoup
 from indonewsfeed.items import IndoNewsFeedItem
 from indonewsfeed.bs_helper import HtmlCleaner
@@ -28,21 +28,32 @@ class DetikSpider(scrapy.Spider):
         item["title"] = soup.title.string
         item["url"] = response.url
         item["datetime"] = self.get_published_date(soup)
-        item["html_content"] = self.get_news_detail(soup)
-        item["text_content"] = "test"
+        
+
+        html_news = self.get_html_news_detail(soup)
+        clean_html_news = self.get_clean_news_detail(html_news)
+        item["html_content"] = html_news.prettify()
+        item["text_content"] = clean_html_news.get_text(strip=True).replace('\t','')
+
         item["thumbnail_image_url"], item["thumbnail_image_alt"] = self.get_thumbnail_image(soup)
         item["source"] = "detik.com"
         logger = logging.getLogger()
         logger.info("Processing News [Title] : %s" % soup.title.string)
         yield item
 
-    def get_news_detail(self, soup):
+    def get_html_news_detail(self, soup):
         helper = HtmlCleaner()
         content = soup.find("div",{"id":"detikdetailtext"})
         helper.remove_comment(content)
         helper.remove_element(content, 'table')
         helper.remove_element(content, 'script')
-        return content.prettify()
+        return content
+    
+    def get_clean_news_detail(self, soup):
+        helper = HtmlCleaner()
+        invalid_tags = ['a', 'b', 'br', 'center', 'div', 'strong', 'ins']
+        helper.remove_tags_and_get_content(soup, invalid_tags)
+        return soup
     
     def get_news_category(self, url):
         if '/berita/' in url:
@@ -82,4 +93,8 @@ class DetikSpider(scrapy.Spider):
         hour = int(times[0])
         minute = int(times[1])
 
-        return datetime(year, month, day, hour=hour,minute=minute).isoformat()
+        server_datetime = datetime (year, month, day, hour=hour,minute=minute)
+        server_datetime = server_datetime - timedelta(hours=7)
+        server_datetime = server_datetime.replace(tzinfo = timezone.utc).isoformat()
+
+        return server_datetime

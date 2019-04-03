@@ -23,7 +23,9 @@ try :
         }
     )
     print("Create Table Link Status :", response['TableDescription']['TableStatus'])
-except dynamodb.exceptions.ResourceInUseException:
+
+   
+except client.exceptions.ResourceInUseException:
     print("Skipping Create Table Link")
     pass
 
@@ -49,6 +51,16 @@ try:
         }
     )
     print("Create Table Article Status :",  response['TableDescription']['TableStatus'])
-except dynamodb.exceptions.ResourceInUseException:
+
+except client.exceptions.ResourceInUseException:
     print("Skipping Create Table Article")
     pass
+
+
+response = client.update_time_to_live(
+    TableName='link',
+    TimeToLiveSpecification={
+        'Enabled': True,
+        'AttributeName': 'ttl'
+    }
+)

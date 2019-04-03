@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\aufaa\\AppData\\Local\\conda\\conda\\envs\\scrapper\\python.exe"
+    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python.exe",
+    "editor.renderWhitespace": "all"
 }

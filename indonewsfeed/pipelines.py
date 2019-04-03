@@ -18,6 +18,6 @@ class MongoDBPipeline(object):
                 raise DropItem("Missing {0}!".format(data))
 
         repo = NewsRepository()
-        #if valid and not repo.is_link_exist(item["link"]):
+        #if valid and not repo.is_link_exist(item["url"]):
         repo.save(item)
         return item
