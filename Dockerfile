@@ -1,5 +1,5 @@
 # Scrapy run on python. choose official python docker image
-FROM python:3.6
+FROM python:3.6-alpine
 
 # SET arguments
 ARG AWS_ACCESS_KEY_ID
