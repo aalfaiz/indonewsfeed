@@ -91,7 +91,3 @@ ITEM_PIPELINES = {
 
 LOG_LEVEL = 'ERROR'
 LOG_FILE = 'log/app.scrapylog'
-
-MONGODB_URI =  "mongodb://aalfaiz:aalfaiz@localhost"
-MONGODB_DB = "indonewsfeed"
-MONGODB_COLLECTION = "newsfeed"

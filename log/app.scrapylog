@@ -1,0 +1,19 @@
+2019-04-10 23:24:57 [scrapy.core.scraper] ERROR: Spider error processing <GET https://news.detik.com/berita/d-4505307/bowo-sidik-buka-suara-bpn-berharap-pada-dewa-yama> (referer: https://news.detik.com/indeks)
+Traceback (most recent call last):
+  File "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\lib\site-packages\scrapy\utils\defer.py", line 102, in iter_errback
+    yield next(it)
+  File "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\lib\site-packages\scrapy\spidermiddlewares\offsite.py", line 29, in process_spider_output
+    for x in result:
+  File "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\lib\site-packages\scrapy\spidermiddlewares\referer.py", line 339, in <genexpr>
+    return (_set_referer(r) for r in result or ())
+  File "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\lib\site-packages\scrapy\spidermiddlewares\urllength.py", line 37, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\lib\site-packages\scrapy\spidermiddlewares\depth.py", line 58, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "F:\Learn\indonewsfeed\indonewsfeed\spiders\detik_spider.py", line 30, in parse_detail_page_news
+    item["datetime"] = self.get_published_date(soup)
+  File "F:\Learn\indonewsfeed\indonewsfeed\spiders\detik_spider.py", line 69, in get_published_date
+    return self.parse_datestring_to_date_time(published_date.get_text())
+  File "F:\Learn\indonewsfeed\indonewsfeed\spiders\detik_spider.py", line 76, in parse_datestring_to_date_time
+    day = int(date_part[1])
+ValueError: invalid literal for int() with base 10: '22:02:52'
