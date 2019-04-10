@@ -1,20 +1,6 @@
 # Scrapy run on python. choose official python docker image
 FROM python:3.6-slim
 
-# Add crontab file in the cron directory
-ADD crontab /etc/cron.d/indonewsfeed-cron
-
-# Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/indonewsfeed-cron
-
-# Create the log file to be able to run tail
-RUN touch /var/log/cron.log
-
-#Install Cron
-RUN apt-get update
-RUN apt-get -y install cron
-
-
 # SET arguments
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
@@ -39,7 +25,4 @@ RUN apt-get update \
 
 COPY . .
 
-# Run the command on container startup
-CMD cron && tail -f /var/log/cron.log
-
-#CMD [ "python3", "./run.py"] 
+ENTRYPOINT [ "python3", "./run.py"] 
