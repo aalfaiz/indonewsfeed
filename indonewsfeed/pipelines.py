@@ -9,7 +9,7 @@ from indonewsfeed.db_services import NewsRepository
 from scrapy.exceptions import DropItem
 from scrapy import log
 
-class MongoDBPipeline(object):
+class DynamoDBPipeline(object):
     def process_item(self, item, spider):
         valid = True
         for data in item:

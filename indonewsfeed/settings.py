@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'indonewsfeed.pipelines.MongoDBPipeline': 300,
+    'indonewsfeed.pipelines.DynamoDBPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -89,7 +89,8 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'ERROR'
+LOG_FILE = 'log/app.scrapylog'
 
 MONGODB_URI =  "mongodb://aalfaiz:aalfaiz@localhost"
 MONGODB_DB = "indonewsfeed"
