@@ -18,10 +18,9 @@ WORKDIR /usr/scr/app
 COPY requirements.txt ./
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential gcc \
+    && apt-get install -y --no-install-recommends build-essential gcc cron \
     && rm -rf /var/lib/apt/lists/* \
     && pip3 install awscli && pip3 install --no-cache-dir -r requirements.txt \
-    && apt-get -y install cron \
     && apt-get purge -y --auto-remove build-essential gcc
 
 # Add crontab file in the cron directory
