@@ -91,3 +91,4 @@ ITEM_PIPELINES = {
 
 LOG_LEVEL = 'ERROR'
 LOG_FILE = 'log/app.scrapylog'
+LOG_STDOUT = True
