@@ -37,4 +37,4 @@ COPY . .
 #ENTRYPOINT [ "python3", "./run.py"] 
 
 # Run the command on container startup
-CMD ["cron", "-f"]
+CMD ["crond", "-f", "-d", "8"]
